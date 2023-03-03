@@ -1,0 +1,35 @@
+<%= form_with(model: place) do |form| %>
+  <div class="flex flex-col">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :country %>
+    <%= form.text_field :country %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :price %>
+    <%= form.number_field :price %>
+  </div>
+  <div class="flex flex-col">
+    <%= form.label :images %>
+    <%= form.file_field :images, multiple: true %>
+  </div>
+  <%= form.submit 'Create' %>
+<% end %>

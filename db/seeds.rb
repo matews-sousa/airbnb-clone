@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 require 'faker'
 
-Place.create([
+[
   {
     name: Faker::Lorem.words(number: 3).join(" "),
     description: Faker::Lorem.paragraph(sentence_count: 2),
@@ -62,4 +62,7 @@ Place.create([
     state: "SP",
     country: "Brazil"
   },
-])
+].each_with_index do |p, index|
+  place = Place.create!(p)
+  place.images.attach(io: File.open(Rails.root.join("db", "sample", "images", "place_#{index + 1}.png")), filename: "place_#{index + 1}.png")
+end

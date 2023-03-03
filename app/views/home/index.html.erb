@@ -1,26 +1,28 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-8"
 >
   <% @places.each do |place| %>
-    <article
-      data-controller="place"
-      data-place-latitude-value="<%= place.latitude %>"
-      data-place-longitude-value="<%= place.longitude %>"
-    >
-      <img src="https://a0.muscache.com/im/pictures/monet/Luxury-54336752/original/c766376d-239c-4d1e-b8d6-7702e3e8d322?im_w=720"
-        class="rounded-md"
+    <%= link_to place_show_path(place) do %>
+      <article
+        data-controller="place"
+        data-place-latitude-value="<%= place.latitude %>"
+        data-place-longitude-value="<%= place.longitude %>"
       >
-      <h1 class="font-semibold mt-2">
-        <%= place.city %>, <%= place.country %>
-      </h1>
-      <p data-place-target="distance" class="text-gray-700">
-        Calculating distance...
-      </p>
-      <p>
-        <span class="font-semibold">
-          $<%= place.price %>
-        </span>
-        night
-      </p>
-    </article>
+        <% if place.images.attached? %>
+          <%= image_tag place.default_image, class: "rounded-md h-56 w-full object-cover" %>
+        <% end %>
+        <h1 class="font-semibold mt-2">
+          <%= place.city %>, <%= place.country %>
+        </h1>
+        <p data-place-target="distance" class="text-gray-700">
+          Calculating distance...
+        </p>
+        <p>
+          <span class="font-semibold">
+            $<%= place.price %>
+          </span>
+          night
+        </p>
+      </article>
+    <% end %>
   <% end %>
 </div>

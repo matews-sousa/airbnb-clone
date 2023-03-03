@@ -1,0 +1,8 @@
+<h1>
+  <%= @place.name %>
+</h1>
+<div class="h-96">
+  <% if @place.images.attached? %>
+    <%= image_tag @place.default_image, class: 'w-full h-full object-cover' %>
+  <% end %>
+</div>
