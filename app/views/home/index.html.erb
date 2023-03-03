@@ -1,1 +1,18 @@
-<h1>Home</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-8"
+>
+  <% @places.each do |place| %>
+    <article
+      data-controller="place"
+      data-place-latitude-value="<%= place.latitude %>"
+      data-place-longitude-value="<%= place.longitude %>"
+    >
+      <img src="https://a0.muscache.com/im/pictures/monet/Luxury-54336752/original/c766376d-239c-4d1e-b8d6-7702e3e8d322?im_w=720"
+        class="rounded-md"
+      >
+      <h1 class="font-semibold mt-2">
+        <%= place.city %>, <%= place.country %>
+      </h1>
+      <p data-place-target="distance" class="text-gray-700"></p>
+    </article>
+  <% end %>
+</div>

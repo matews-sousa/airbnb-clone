@@ -56,6 +56,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "rspec-rails", "~> 6.0.0"
   gem "factory_bot_rails", "~> 6.0.0"
+  gem "faker"
 end
 
 group :development do
@@ -70,3 +71,4 @@ group :development do
 end
 
 gem "devise"
+gem "geocoder", "~> 1.8", ">= 1.8.1"
