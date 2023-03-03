@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { getDistance, convertDistance } from "geolib"
+import { getDistance } from "geolib"
 
 export default class extends Controller {
   static targets = ["distance"]
@@ -11,7 +11,10 @@ export default class extends Controller {
 
   connect() {
     navigator.geolocation.getCurrentPosition((position) => {
-      if (!this.latitudeValue || !this.longitudeValue) return;
+      if (!this.latitudeValue || !this.longitudeValue) {
+        this.distanceTarget.textContent = "No location data available"
+        return;
+      }
 
       const { latitude, longitude } = position.coords
       const distance = getDistance(

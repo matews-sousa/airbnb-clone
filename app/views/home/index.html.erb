@@ -12,7 +12,15 @@
       <h1 class="font-semibold mt-2">
         <%= place.city %>, <%= place.country %>
       </h1>
-      <p data-place-target="distance" class="text-gray-700"></p>
+      <p data-place-target="distance" class="text-gray-700">
+        Calculating distance...
+      </p>
+      <p>
+        <span class="font-semibold">
+          $<%= place.price %>
+        </span>
+        night
+      </p>
     </article>
   <% end %>
 </div>
