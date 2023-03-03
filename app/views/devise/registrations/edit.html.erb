@@ -37,15 +37,18 @@
         </div>
       </div>
       <div class="col-span-1">
-        <div class="flex flex-col">
-          <%= f.label :avatar, class: 'font-medium mb-1' %>
-          <div class="flex gap-2 items-end">
-            <% if current_user.avatar.attached? %>
-              <%= image_tag current_user.avatar, class: 'w-44 h-44 rounded-full' %>
-            <% else %>
-              <%= image_tag '/assets/default_pfp.jpg', class: 'w-44 h-44 rounded-full' %>
+        <div class="flex flex-col items-center"
+        >
+          <div class="relative" data-controller="image-upload">
+            <p class="font-medium mb-1">Avatar</p>
+            <%= f.label :avatar, class: 'font-medium mb-1 absolute bottom-0 left-0 bg-sky-500 hover:bg-sky-400 p-2 rounded-md text-white cursor-pointer flex items-center gap-2 font-semibold' do %>
+              <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+              </svg>
+              <span>Edit</span>
             <% end %>
-            <%= f.file_field :avatar, class: 'p-2 border border-gray-300 hover:border-gray-400 focus:outline-none focus:border-blue-400 rounded-md' %>
+            <%= image_tag current_user.avatar.attached? ? current_user.avatar : '/assets/default_pfp.jpg', class: "w-44 h-44 rounded-full", data: { "image-upload-target": "preview" } %>
+            <%= f.file_field :avatar, data: { "image-upload-target": "input", action: "change->image-upload#upload" }, class: 'hidden' %>
           </div>
         </div>
       </div>
