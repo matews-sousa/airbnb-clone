@@ -12,7 +12,7 @@ class PlaceController < ApplicationController
   def create
     @place = Place.new(place_params)
     if @place.save
-      redirect_to place_show_path(@place.id)
+      redirect_to show_place_path(@place)
     else
       render :new
     end
@@ -21,6 +21,6 @@ class PlaceController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :address, :description, :price, :city, :country, :state, images: [])
+    params.require(:place).permit(:name, :headline, :address, :description, :price, :city, :country, :state, images: [])
   end
 end

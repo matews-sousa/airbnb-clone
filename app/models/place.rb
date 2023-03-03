@@ -1,5 +1,5 @@
 class Place < ApplicationRecord
-  validates :name, :description, :price, :address, presence: true
+  validates :name, :headline, :description, :price, :address, presence: true
   validates :price, numericality: { greater_than: 0 }
 
   has_many_attached :images, dependent: :destroy

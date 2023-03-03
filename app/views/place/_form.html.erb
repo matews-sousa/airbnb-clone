@@ -1,35 +1,50 @@
 <%= form_with(model: place) do |form| %>
-  <div class="flex flex-col">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="flex flex-col gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="flex flex-col">
+        <%= form.label :name, class: 'font-medium mb-1' %>
+        <%= form.text_field :name, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      </div>
+      <div class="flex flex-col">
+        <%= form.label :headline, class: 'font-medium mb-1' %>
+        <%= form.text_field :headline, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      </div>
+    </div>
+    <div class="flex flex-col">
+      <%= form.label :description, class: 'font-medium mb-1' %>
+      <%= form.text_area :description, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+    </div>
+    <div class="flex flex-col">
+      <%= form.label :address, class: 'font-medium mb-1' %>
+      <%= form.text_field :address, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="flex flex-col">
+        <%= form.label :city, class: 'font-medium mb-1' %>
+        <%= form.text_field :city, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      </div>
+      <div class="flex flex-col">
+        <%= form.label :country, class: 'font-medium mb-1' %>
+        <%= form.text_field :country, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      </div>
+      <div class="flex flex-col">
+        <%= form.label :state, class: 'font-medium mb-1' %>
+        <%= form.text_field :state, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      </div>
+      <div class="flex flex-col">
+        <%= form.label :price, class: 'font-medium mb-1' %>
+        <%= form.number_field :price, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      </div>
+    </div>
+    <div class="flex flex-col" data-controller="image-upload">
+      <%= form.label :images, class: 'font-medium' %>
+      <div class="border rounded-md min-h-32 my-1 flex flex-wrap gap-2" data-image-upload-target="preview">
+      </div>
+      <%= form.file_field :images, multiple: true, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', data: {
+        "image-upload-target": "input",
+        action: "change->image-upload#uploadMultiple"
+      } %>
+    </div>
+    <%= form.submit 'Create', class: 'py-2 rounded-md bg-blue-500 hover:bg-blue-400 w-full text-white font-semibold cursor-pointer' %>
   </div>
-  <div class="flex flex-col">
-    <%= form.label :description %>
-    <%= form.text_field :description %>
-  </div>
-  <div class="flex flex-col">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
-  <div class="flex flex-col">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
-  <div class="flex flex-col">
-    <%= form.label :country %>
-    <%= form.text_field :country %>
-  </div>
-  <div class="flex flex-col">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
-  <div class="flex flex-col">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
-  </div>
-  <div class="flex flex-col">
-    <%= form.label :images %>
-    <%= form.file_field :images, multiple: true %>
-  </div>
-  <%= form.submit 'Create' %>
 <% end %>
