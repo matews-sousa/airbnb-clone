@@ -1,7 +1,7 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-8"
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
 >
   <% @places.each do |place| %>
-    <%= link_to place_show_path(place) do %>
+    <%= link_to show_place_path(place) do %>
       <article
         data-controller="place"
         data-place-latitude-value="<%= place.latitude %>"
