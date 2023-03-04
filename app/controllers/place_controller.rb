@@ -11,6 +11,8 @@ class PlaceController < ApplicationController
 
   def create
     @place = Place.new(place_params)
+    @place.host = current_user
+
     if @place.save
       redirect_to show_place_path(@place)
     else
@@ -21,6 +23,6 @@ class PlaceController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :headline, :description, :price, :address_1, :address_2, :postal_code, :city, :country, :state, :latitude, :longitude, images: [])
+    params.require(:place).permit(:name, :headline, :description, :price, :cleaning_fee, :address_1, :address_2, :postal_code, :city, :country, :state, :latitude, :longitude, images: [])
   end
 end

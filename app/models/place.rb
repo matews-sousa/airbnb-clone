@@ -1,7 +1,8 @@
 class Place < ApplicationRecord
-  validates :name, :headline, :description, :price, :address_1, presence: true
+  validates :name, :headline, :description, :price, :cleaning_fee, :address_1, presence: true
   validates :price, numericality: { greater_than: 0 }
 
+  belongs_to :host, class_name: 'User'
   has_many_attached :images, dependent: :destroy
 
   geocoded_by :address

@@ -22,15 +22,34 @@
   <% end %>
 </div>
 <div class="grid grid-cols-3 gap-24 mt-6">
-  <div class="col-span-2">
-    <h2 class="text-2xl font-semibold">
-      <%= @place.description %>
-    </h2>
-  </div>
+  <header class="col-span-2 flex justify-between">
+    <div class="flex flex-col">
+      <h2 class="text-xl font-medium">
+        <%= @place.name %> (Hosted by <%= @place.host.name %>)
+      </h2>
+      <div class="flex gap-4">
+        <p class="text-gray-600">
+          2 guests
+        </p>
+        <p class="text-gray-600">
+          2 bedrooms
+        </p>
+        <p class="text-gray-600">
+          2 beds
+        </p>
+        <p class="text-gray-600">
+          2 baths
+        </p>
+      </div>
+    </div>
+    <div class="">
+      <%= image_tag @place.host.avatar.attached? ? @place.host.avatar : '/assets/default_pfp.jpg', class: 'w-16 h-16 rounded-full' %>
+    </div>
+  </header>
   <div class="">
     <div class="border border-gray-300 rounded-md shadow-lg p-6">
       <p class="text-xl">
-        <span class="font-semibold">$<%= @place.price %></span>
+        <span class="font-semibold"><%= number_to_currency(@place.price, precision: 0) %></span>
         <span class="text-gray-600">night</span>
       </p>
       <div class="mt-6">
@@ -46,17 +65,17 @@
       </div>
       <div class="flex flex-col space-y-2 text-lg text-gray-600 mt-6">
         <div class="flex justify-between">
-          <p>R$<%= @place.price %> x 5 nights</p>
-          <p>R$<%= @place.price * 5 %></p>
+          <p><%= @place.price %> x 5 nights</p>
+          <p><%= number_to_currency(@place.price * 5, precision: 0) %></p>
         </div>
         <div class="flex justify-between">
           <p>Cleaning fee</p>
-          <p>R$80</p>
+          <p><%= number_to_currency(@place.cleaning_fee, precision: 0) %></p>
         </div>
         <div class="h-[1px] bg-gray-500 my-6"></div>
         <div class="flex justify-between font-semibold">
           <p>Total</p>
-          <p>R$<%= @place.price * 5 + 80 %></p>
+          <p><%= number_to_currency(@place.price * 5 + @place.cleaning_fee, precision: 0) %></p>
         </div>
       </div>
     </div>
