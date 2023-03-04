@@ -19,7 +19,7 @@
       data-action="map-loaded@window->places#initMap"
       >
       <%= form.label :address, class: 'font-medium mb-1' %>
-      <input autocomplete="false", data-places-target="input" class='p-2 rounded-md border border-gray-400 hover:border-gray-500' />
+      <input autocomplete="false", data-places-target="input" data-action="keydown->places#keydown" class='p-2 rounded-md border border-gray-400 hover:border-gray-500' />
       <input type="hidden" name="place[address_1]" data-places-target="line1">
       <input type="hidden" name="place[address_2]" data-places-target="line2">
       <input type="hidden" name="place[postal_code]" data-places-target="postal_code">

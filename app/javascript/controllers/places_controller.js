@@ -11,10 +11,10 @@ export default class extends Controller {
 
   initMap() {
     this.autocomplete = new google.maps.places.Autocomplete(this.inputTarget, {
-      fields: ["place_id", "geometry", "formatted_address", "address_components"],
-      types: ['address']
+      fields: ["geometry", "address_components"],
+      types: ["address"]
     })
-    this.autocomplete.addListener('place_changed', this.placeSelected.bind(this))
+    this.autocomplete.addListener("place_changed", this.placeSelected.bind(this))
   }
 
   placeSelected() {
@@ -40,9 +40,6 @@ export default class extends Controller {
         case "locality":
           this.cityTarget.value = component.long_name
           break
-        case "administrative_area_level_2":
-          this.cityTarget.value = component.short_name
-          break
         case "administrative_area_level_1":
           this.stateTarget.value = component.short_name
           break
@@ -50,6 +47,12 @@ export default class extends Controller {
           this.countryTarget.value = component.long_name
           break
       }
+    }
+  }
+
+  keydown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault()
     }
   }
 }
