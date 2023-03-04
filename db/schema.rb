@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_04_132626) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_181713) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_132626) do
     t.string "postal_code"
     t.integer "host_id", null: false
     t.decimal "cleaning_fee"
+    t.integer "max_guests"
+    t.integer "rooms"
+    t.integer "beds"
+    t.integer "baths"
+    t.integer "min_reservation_days"
     t.index ["host_id"], name: "index_places_on_host_id"
     t.index ["latitude"], name: "index_places_on_latitude"
     t.index ["longitude"], name: "index_places_on_longitude"

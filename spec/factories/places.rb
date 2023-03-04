@@ -5,6 +5,11 @@ FactoryBot.define do
     description { "MyText" }
     price { 9.99 }
     cleaning_fee { 9.99 }
+    max_guests { 1 }
+    rooms { 1 }
+    beds { 1 }
+    baths { 1 }
+    min_reservation_days { 1 }
     address_1 { "73 Bd de la Croisette" }
     postal_code { "06400" }
     city { "Cannes" }
