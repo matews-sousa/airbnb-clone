@@ -13,7 +13,8 @@ require 'faker'
     headline: Faker::Lorem.sentence(word_count: 5),
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: Faker::Number.decimal(l_digits: 2),
-    address: "73 Bd de la Croisette, 06400 Cannes",
+    address_1: "73 Bd de la Croisette",
+    postal_code: "06400",
     city: "Cannes",
     state: "Alpes-Maritimes",
     country: "France"
@@ -23,7 +24,8 @@ require 'faker'
     headline: Faker::Lorem.sentence(word_count: 5),
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: Faker::Number.decimal(l_digits: 2),
-    address: "2 Rue Brougham, 06400 Cannes",
+    address: "2 Rue Brougham",
+    postal_code: "06400",
     city: "Cannes",
     state: "Alpes-Maritimes",
     country: "France"
@@ -33,7 +35,8 @@ require 'faker'
     headline: Faker::Lorem.sentence(word_count: 5),
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: Faker::Number.decimal(l_digits: 2),
-    address: "6 Rue de Bône, 06400 Cannes",
+    address: "6 Rue de Bône",
+    postal_code: "06400",
     city: "Cannes",
     state: "Alpes-Maritimes",
     country: "France"
@@ -43,7 +46,8 @@ require 'faker'
     headline: Faker::Lorem.sentence(word_count: 5),
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: Faker::Number.decimal(l_digits: 2),
-    address: "R. Rocha Lima, 139 Centro, Fortaleza, CE",
+    address: "R. Rocha Lima, 139 Centro",
+    postal_code: "64000",
     city: "Fortaleza",
     state: "CE",
     country: "Brazil"
@@ -54,6 +58,7 @@ require 'faker'
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: Faker::Number.decimal(l_digits: 2),
     address: "Av. Dom Manuel, 1353 Centro, Fortaleza, CE",
+    postal_code: "64000",
     city: "Fortaleza",
     state: "CE",
     country: "Brazil"
@@ -64,6 +69,7 @@ require 'faker'
     description: Faker::Lorem.paragraph(sentence_count: 2),
     price: Faker::Number.decimal(l_digits: 2),
     address: "R. Itamiami, 91 Vila Mariana, São Paulo, SP",
+    postal_code: "04001-000",
     city: "São Paulo",
     state: "SP",
     country: "Brazil"

@@ -1,5 +1,5 @@
 class Place < ApplicationRecord
-  validates :name, :headline, :description, :price, :address, presence: true
+  validates :name, :headline, :description, :price, :address_1, presence: true
   validates :price, numericality: { greater_than: 0 }
 
   has_many_attached :images, dependent: :destroy
@@ -7,6 +7,10 @@ class Place < ApplicationRecord
   geocoded_by :address
 
   after_validation :geocode
+
+  def address
+    [:address_1, :address_2, :city, :state, :postal_code, :country].compact.join(', ')
+  end
 
   def default_image
     images.first
