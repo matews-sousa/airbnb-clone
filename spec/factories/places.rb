@@ -12,6 +12,6 @@ FactoryBot.define do
     country { "France" }
     latitude { 43.5513 }
     longitude { 7.0128 }
-    association :host, factory: :user
+    host { build(:user) }
   end
 end
