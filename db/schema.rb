@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_04_181713) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_05_002018) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -37,6 +37,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_181713) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "place_id", null: false
+    t.index ["place_id"], name: "index_favorites_on_place_id"
+    t.index ["user_id", "place_id"], name: "index_favorites_on_user_id_and_place_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -81,5 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_181713) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorites", "places"
+  add_foreign_key "favorites", "users"
   add_foreign_key "places", "users", column: "host_id"
 end

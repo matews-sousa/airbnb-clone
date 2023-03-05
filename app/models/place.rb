@@ -19,6 +19,7 @@ class Place < ApplicationRecord
     :min_reservation_days,
     numericality: { greater_than: 0 }
 
+  has_many :favorites, dependent: :destroy
   belongs_to :host, class_name: 'User'
   has_many_attached :images, dependent: :destroy
 

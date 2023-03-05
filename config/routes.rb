@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'profile/places', to: 'place#new', as: 'new_place'
   post 'places', to: 'place#create'
 
+  resources :favorites, only: [:create, :destroy]
+
   devise_for :users, controllers: { 
     registrations: 'users/registrations',
     sessions: 'users/sessions'

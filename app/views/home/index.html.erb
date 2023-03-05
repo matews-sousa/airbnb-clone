@@ -1,28 +1,34 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
 >
   <% @places.each do |place| %>
-    <%= link_to show_place_path(place) do %>
-      <article
+    <article
         data-controller="place"
         data-place-latitude-value="<%= place.latitude %>"
         data-place-longitude-value="<%= place.longitude %>"
       >
+      <div class="relative">
         <% if place.images.attached? %>
           <%= image_tag place.default_image, class: "rounded-md h-56 w-full object-cover" %>
         <% end %>
+        <% favorite = current_user.favorites.find_by(place: place) %>
+        <div class="absolute top-2 right-2">
+          <%= render 'shared/favorite_button', favorite: favorite, place: place, render_text: false %>
+        </div>
+      </div>
+      <%= link_to show_place_path(place) do %>
         <h1 class="font-semibold mt-2">
           <%= place.city %>, <%= place.country %>
         </h1>
-        <p data-place-target="distance" class="text-gray-700">
-          Calculating distance...
-        </p>
-        <p>
-          <span class="font-semibold">
-            $<%= place.price %>
-          </span>
-          night
-        </p>
-      </article>
-    <% end %>
+      <% end %>
+      <p data-place-target="distance" class="text-gray-700">
+        Calculating distance...
+      </p>
+      <p>
+        <span class="font-semibold">
+          $<%= place.price %>
+        </span>
+        night
+      </p>
+    </article>
   <% end %>
 </div>
