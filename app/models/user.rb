@@ -10,4 +10,19 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :places, foreign_key: 'host_id', dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
+
+  before_create :maybe_set_stripe_costumer_id
+
+  def maybe_set_stripe_costumer_id
+    return if stripe_costumer_id.present?
+
+    customer = Stripe::Customer.create({
+      email: email,
+      name: name,
+      metadata: {
+        airbnb_id: id
+      }
+    })
+    self.update(stripe_costumer_id: customer.id)
+  end
 end
