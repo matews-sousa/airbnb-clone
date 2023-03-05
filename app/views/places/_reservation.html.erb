@@ -29,7 +29,11 @@
       %>
     </div>
     <%= form.number_field :guests, placeholder: "Number of guests", min: "1", max: "#{@place.max_guests}", class: "border border-gray-500 rounded-b-md w-full p-3" %>
-    <%= form.submit 'Reserve', class: "mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold cursor-pointer" %>
+    <% if signed_in? %>
+      <%= form.submit 'Reserve', class: "mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold cursor-pointer" %>
+    <% else %>
+      <%= link_to 'Sign in to reserve', new_user_session_path, class: "block text-center mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold cursor-pointer" %>
+    <% end %>
     <p class="mt-2 text-gray-500 text-center">You won't be charged</p>
   <% end %>
   <div class="flex flex-col space-y-2 text-lg text-gray-600 mt-6">

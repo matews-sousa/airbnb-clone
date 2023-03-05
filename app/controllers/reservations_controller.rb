@@ -8,7 +8,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to place_path(@reservation.place)
     else
-      render 'places/show'
+      redirect_to place_path(@reservation.place), notice: "Error"
     end
   end
 
