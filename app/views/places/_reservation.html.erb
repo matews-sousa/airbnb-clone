@@ -3,29 +3,35 @@
   data-reservation-price-value="<%= @place.price %>"
   data-reservation-min-nights-value="<%= @place.min_reservation_days %>"
   data-reservation-cleaning-fee-value="<%= @place.cleaning_fee %>"
+  data-reservation-first-date-available-value="<%= @place.first_available_date %>"
 >
   <p class="text-xl">
     <span class="font-semibold"><%= number_to_currency(@place.price, precision: 0) %></span>
     <span class="text-gray-600">night</span>
   </p>
-  <span class="text-sm text-gray-600">(minimum of <%= @place.min_reservation_days %> nights)</span>
-  <div class="mt-6">
+  <p class="text-sm text-gray-600 mb-6">(minimum of <%= @place.min_reservation_days %> nights)</p>
+  <%= form_with(model: @reservation) do |form| %>
+    <input type="hidden" name="reservation[place_id]" value="<%= @place.id %>"/>
     <div class="grid grid-cols-2">
-      <input type="date" class="border border-gray-500 rounded-tl-md p-3" 
-        data-reservation-target="checkin" 
-        data-action="change->reservation#checkinChanged"
-      />
-      <input type="date" class="border border-gray-500 rounded-tr-md p-3" 
-        data-reservation-target="checkout" 
-        data-action="change->reservation#checkoutChanged"
-      />
+      <%= form.date_field :checkin,
+        class: "border border-gray-500 rounded-tl-md p-3",
+        data: {
+          "reservation-target": "checkin",
+          action: "change->reservation#checkinChanged"
+        } 
+      %>
+      <%= form.date_field :checkout,
+        class: "border border-gray-500 rounded-tr-md p-3",
+        data: {
+          "reservation-target": "checkout",
+          action: "change->reservation#checkoutChanged"
+        } 
+      %>
     </div>
-    <input type="number" placeholder="Number of guests" min="1" max="<%= @place.max_guests %>" class="border border-gray-500 rounded-b-md w-full p-3"/>
-    <button class="mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold">
-      Reserve
-    </button>
+    <%= form.number_field :guests, placeholder: "Number of guests", min: "1", max: "#{@place.max_guests}", class: "border border-gray-500 rounded-b-md w-full p-3" %>
+    <%= form.submit 'Reserve', class: "mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold cursor-pointer" %>
     <p class="mt-2 text-gray-500 text-center">You won't be charged</p>
-  </div>
+  <% end %>
   <div class="flex flex-col space-y-2 text-lg text-gray-600 mt-6">
     <div class="flex justify-between">
       <p><%= number_to_currency(@place.price, precision: 0) %> x <span data-reservation-target="totalNights"></span> nights</p>

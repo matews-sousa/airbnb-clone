@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'reservations', to: 'reservations#create'
   get 'profile/places', to: 'places#index', as: 'my_places'
   get 'profile/places/new', to: 'places#new', as: 'new_place'
   resources :places, only: [:show, :create]

@@ -8,6 +8,7 @@ class PlacesController < ApplicationController
   def show
     @place = Place.find(params[:id])
     @favorite = current_user.favorites.find_by(place_id: @place.id) if current_user
+    @reservation = Reservation.new
   end
 
   def new

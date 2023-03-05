@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_002018) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_05_160330) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_002018) do
     t.index ["longitude"], name: "index_places_on_longitude"
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.date "checkin"
+    t.date "checkout"
+    t.integer "guests"
+    t.integer "place_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["place_id"], name: "index_reservations_on_place_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -92,4 +104,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_002018) do
   add_foreign_key "favorites", "places"
   add_foreign_key "favorites", "users"
   add_foreign_key "places", "users", column: "host_id"
+  add_foreign_key "reservations", "places"
+  add_foreign_key "reservations", "users"
 end

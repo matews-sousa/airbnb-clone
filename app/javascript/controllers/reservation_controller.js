@@ -8,18 +8,17 @@ export default class extends Controller {
     price: Number,
     minNights: Number,
     cleaningFee: Number,
+    firstDateAvailable: String,
   }
 
   connect() {
-    const today = new Date().toISOString().substr(0, 10)
-
     // set minCheckout date to today + minNights
     const minCheckout = new Date()
     minCheckout.setDate(minCheckout.getDate() + this.minNightsValue)
     this.checkoutTarget.min = minCheckout.toISOString().substr(0, 10)
 
-    this.checkinTarget.min = today
-    this.checkinTarget.value = today
+    this.checkinTarget.min = this.firstDateAvailableValue
+    this.checkinTarget.value = this.firstDateAvailableValue
     this.checkinChanged()
   }
 
