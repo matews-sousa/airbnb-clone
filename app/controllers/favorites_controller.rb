@@ -9,7 +9,7 @@ class FavoritesController < ApplicationController
     if @favorite.save
       send_turbo_stream(@favorite, @place)
     else
-      send_turbo_stream(nil, @place)
+      redirect_back fallback_location: request.referer
     end
   end
   

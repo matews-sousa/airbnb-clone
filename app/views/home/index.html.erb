@@ -10,10 +10,12 @@
         <% if place.images.attached? %>
           <%= image_tag place.default_image, class: "rounded-md h-56 w-full object-cover" %>
         <% end %>
-        <% favorite = current_user.favorites.find_by(place: place) %>
-        <div class="absolute top-2 right-2">
-          <%= render 'shared/favorite_button', favorite: favorite, place: place, render_text: false %>
-        </div>
+        <% if signed_in? %>
+          <% favorite = current_user.favorites.find_by(place: place) %>
+          <div class="absolute top-2 right-2">
+            <%= render 'shared/favorite_button', favorite: favorite, place: place, render_text: false %>
+          </div>
+        <% end %>
       </div>
       <%= link_to show_place_path(place) do %>
         <h1 class="font-semibold mt-2">
