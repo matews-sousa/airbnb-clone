@@ -1,0 +1,44 @@
+<div class="border border-gray-300 rounded-md shadow-lg p-6"
+  data-controller="reservation"
+  data-reservation-price-value="<%= @place.price %>"
+  data-reservation-min-nights-value="<%= @place.min_reservation_days %>"
+  data-reservation-cleaning-fee-value="<%= @place.cleaning_fee %>"
+>
+  <p class="text-xl">
+    <span class="font-semibold"><%= number_to_currency(@place.price, precision: 0) %></span>
+    <span class="text-gray-600">night</span>
+  </p>
+  <span class="text-sm text-gray-600">(minimum of <%= @place.min_reservation_days %> nights)</span>
+  <div class="mt-6">
+    <div class="grid grid-cols-2">
+      <input type="date" class="border border-gray-500 rounded-tl-md p-3" 
+        data-reservation-target="checkin" 
+        data-action="change->reservation#checkinChanged"
+      />
+      <input type="date" class="border border-gray-500 rounded-tr-md p-3" 
+        data-reservation-target="checkout" 
+        data-action="change->reservation#checkoutChanged"
+      />
+    </div>
+    <input type="number" placeholder="Number of guests" min="1" max="<%= @place.max_guests %>" class="border border-gray-500 rounded-b-md w-full p-3"/>
+    <button class="mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold">
+      Reserve
+    </button>
+    <p class="mt-2 text-gray-500 text-center">You won't be charged</p>
+  </div>
+  <div class="flex flex-col space-y-2 text-lg text-gray-600 mt-6">
+    <div class="flex justify-between">
+      <p><%= number_to_currency(@place.price, precision: 0) %> x <span data-reservation-target="totalNights"></span> nights</p>
+      <p data-reservation-target="totalPerNight"><%= number_to_currency(@place.price * 5, precision: 0) %></p>
+    </div>
+    <div class="flex justify-between">
+      <p>Cleaning fee</p>
+      <p><%= number_to_currency(@place.cleaning_fee, precision: 0) %></p>
+    </div>
+    <div class="h-[1px] bg-gray-500 my-6"></div>
+    <div class="flex justify-between font-semibold">
+      <p>Total</p>
+      <p data-reservation-target="totalPrice"><%= number_to_currency(@place.price * 5 + @place.cleaning_fee, precision: 0) %></p>
+    </div>
+  </div>
+</div>

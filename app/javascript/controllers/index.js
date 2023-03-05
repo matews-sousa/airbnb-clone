@@ -4,12 +4,17 @@
 
 import { application } from "./application"
 
-import MenuController from "./menu_controller"
-import PlaceController from "./place_controller"
 import ImageUploadController from "./image_upload_controller"
-import PlacesController from "./places_controller"
-
-application.register("menu", MenuController)
-application.register("place", PlaceController)
 application.register("image-upload", ImageUploadController)
+
+import MenuController from "./menu_controller"
+application.register("menu", MenuController)
+
+import PlaceController from "./place_controller"
+application.register("place", PlaceController)
+
+import PlacesController from "./places_controller"
 application.register("places", PlacesController)
+
+import ReservationController from "./reservation_controller"
+application.register("reservation", ReservationController)
