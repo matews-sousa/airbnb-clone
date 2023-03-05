@@ -6,6 +6,23 @@ RSpec.describe "Favorites", type: :request do
   
   before { sign_in user }
 
+  describe "GET /profile/favorites" do
+    context "user is signed in" do
+      it "returns http success" do
+        get my_favorites_path
+        expect(response).to have_http_status(:success)
+      end
+    end
+
+    context "user is not signed in" do
+      it "redirects to login page" do
+        sign_out user
+        get my_favorites_path
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
+
   describe "POST /favorites" do
     context "user is signed in" do
       it "creates a favorite" do

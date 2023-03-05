@@ -28,7 +28,7 @@ class Place < ApplicationRecord
   after_validation :geocode
 
   def address
-    [:address_1, :address_2, :city, :state, :postal_code, :country].compact.join(', ')
+    [address_1, address_2, city, state, postal_code, country].compact.join(', ')
   end
 
   def default_image

@@ -1,6 +1,11 @@
 class FavoritesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:index, :create, :destroy]
+
+  def index
+    # return an array of places that the current user has favorited
+    @favorites = current_user.favorites.map(&:place)
+  end
 
   def create
     @place = Place.find(favorite_params[:place_id])

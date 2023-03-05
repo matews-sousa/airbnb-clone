@@ -1,5 +1,9 @@
-class PlaceController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+class PlacesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :new, :create]
+
+  def index
+    @places = Place.where(host: current_user)
+  end
 
   def show
     @place = Place.find(params[:id])
@@ -15,7 +19,7 @@ class PlaceController < ApplicationController
     @place.host = current_user
 
     if @place.save
-      redirect_to show_place_path(@place)
+      redirect_to place_path(@place)
     else
       render :new
     end

@@ -6,17 +6,17 @@ RSpec.describe "Places", type: :request do
 
   before { sign_in user }
 
-  describe "GET /places/show/:id" do
+  describe "GET /places/:id" do
     context "passing valid place" do
       it "returns http success" do
-        get show_place_path(place)
+        get place_path(place)
         expect(response).to have_http_status(:success)
       end
     end
 
     context "passing invalid place" do
       it "raise error record not found" do
-        expect { get show_place_path("askdfjaksjha") }.to raise_error(ActiveRecord::RecordNotFound)
+        expect { get place_path("askdfjaksjha") }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end

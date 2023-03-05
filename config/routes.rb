@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'places/show/:id', to: 'place#show', as: 'show_place'
-  get 'profile/places', to: 'place#new', as: 'new_place'
-  post 'places', to: 'place#create'
+  get 'profile/places', to: 'places#index', as: 'my_places'
+  get 'profile/places/new', to: 'places#new', as: 'new_place'
+  resources :places, only: [:show, :create]
 
   resources :favorites, only: [:create, :destroy]
+
+  get 'profile/favorites', to: 'favorites#index', as: 'my_favorites'
 
   devise_for :users, controllers: { 
     registrations: 'users/registrations',

@@ -15,7 +15,7 @@
           <%= render 'shared/favorite_button', favorite: favorite, place: place, render_text: false %>
         </div>
       </div>
-      <%= link_to show_place_path(place) do %>
+      <%= link_to place_path(place) do %>
         <h1 class="font-semibold mt-2">
           <%= place.city %>, <%= place.country %>
         </h1>
