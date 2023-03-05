@@ -11,9 +11,16 @@
     <%= render 'shared/favorite_button', favorite: @favorite, place: @place, render_text: true %>
   </div>
 </header>
-<div class="h-96">
+<div>
   <% if @place.images.attached? %>
-    <%= image_tag @place.default_image, class: 'w-full h-full object-cover rounded-md' %>
+    <div class="grid grid-cols-2 gap-1 md:gap-2">
+      <%= image_tag @place.default_image, class: 'w-full h-full object-cover rounded-md' %>
+      <div class="grid grid-cols-2 gap-1 md:gap-2">
+        <% @place.images.drop(1).first(4).each do |image| %>
+          <%= image_tag image, class: 'w-full h-full object-cover rounded-md' %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>
 <div class="grid grid-cols-3 gap-24 mt-6">
