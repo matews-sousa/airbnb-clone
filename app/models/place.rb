@@ -37,8 +37,8 @@ class Place < ApplicationRecord
   end
 
   def first_available_date
-    return Date.today if reservations.empty?
+    return Date.today if reservations.empty? || reservations.where(status: :paid).empty?
 
-    reservations.order(:checkout).last.checkout + 1
+    reservations.where(status: :paid).order(:checkin).last.checkout + 1
   end
 end

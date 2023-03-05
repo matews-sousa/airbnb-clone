@@ -6,10 +6,34 @@ class ReservationsController < ApplicationController
     @reservation.user = current_user
 
     if @reservation.save
-      redirect_to place_path(@reservation.place)
+      session = Stripe::Checkout::Session.create({
+        mode: 'payment',
+        line_items: [{
+          name: @reservation.place.name,
+          amount: (100 * @reservation.total_price).to_i,
+          currency: 'usd',
+          quantity: 1
+        }],
+        customer: @reservation.user.stripe_customer_id,
+        success_url: reservations_success_url(@reservation) + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url: reservations_cancel_url(@reservation) + "?session_id={CHECKOUT_SESSION_ID}"
+      })
+
+      @reservation.update(checkout_session_id: session.id)
+      redirect_to session.url, allow_other_host: true
     else
       redirect_to place_path(@reservation.place), notice: "Error"
     end
+  end
+
+  def success
+    reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+    reservation.update(status: :paid)
+  end
+
+  def cancel
+    reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+    reservation.update(status: :canceled)
   end
 
   private

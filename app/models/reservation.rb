@@ -1,6 +1,12 @@
 class Reservation < ApplicationRecord
   validates :checkin, :checkout, :guests, presence: true
 
+  enum status: {
+    pending: 0,
+    paid: 1,
+    canceled: 2
+  }
+
   belongs_to :place
   belongs_to :user
   

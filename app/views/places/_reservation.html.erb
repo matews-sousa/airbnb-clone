@@ -10,7 +10,7 @@
     <span class="text-gray-600">night</span>
   </p>
   <p class="text-sm text-gray-600 mb-6">(minimum of <%= @place.min_reservation_days %> nights)</p>
-  <%= form_with(model: @reservation) do |form| %>
+  <%= form_with(model: @reservation, data: { turbo: false }) do |form| %>
     <input type="hidden" name="reservation[place_id]" value="<%= @place.id %>"/>
     <div class="grid grid-cols-2">
       <%= form.date_field :checkin,

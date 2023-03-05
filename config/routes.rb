@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   post 'reservations', to: 'reservations#create'
+  get 'reservations/success', to: 'reservations#success'
+  get 'reservations/cancel', to: 'reservations#cancel'
+
   get 'profile/places', to: 'places#index', as: 'my_places'
   get 'profile/places/new', to: 'places#new', as: 'new_place'
   resources :places, only: [:show, :create]
