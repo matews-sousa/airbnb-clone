@@ -11,6 +11,10 @@ class HostsController < ApplicationController
           card_payments: {requested: true},
           transfers: {requested: true},
         },
+        business_profile: {
+          mcc: '6513',
+          product_description: 'Aluguel de imóveis',
+        },
         business_type: 'individual',
         individual: {
           first_name: current_user.name,
