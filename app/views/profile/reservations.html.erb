@@ -1,0 +1,13 @@
+<%= render "nav" %>
+<header class="flex items-center justify-between">
+  <h1 class="text-lg font-semibold">My Reservations</h1>
+</header>
+<% if @reservations.empty? %>
+  <p class="text-gray-600 mt-6">You haven't favorited any place yet.</p>
+<% else %>
+  <div class="grid grid-cols-1 gap-6 mt-6">
+    <% @reservations.each do |place| %>
+      <%= render "place", place: place %>
+    <% end %>
+  </div>
+<% end %>

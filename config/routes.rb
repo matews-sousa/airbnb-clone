@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get 'places', to: 'profile#places', as: 'my_places'
     get 'places/new', to: 'places#new', as: 'new_place'
     get 'favorites', to: 'profile#favorites', as: 'my_favorites'
+    get 'reservations', to: 'profile#reservations', as: 'my_reservations'
   end
 
   devise_for :users, controllers: { 

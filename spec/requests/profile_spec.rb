@@ -25,4 +25,11 @@ RSpec.describe "Profiles", type: :request do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "GET /profile/reservations" do
+    it "returns http success" do
+      get my_reservations_path
+      expect(response).to have_http_status(200)
+    end
+  end
 end

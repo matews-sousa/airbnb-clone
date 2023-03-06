@@ -8,4 +8,8 @@ class ProfileController < ApplicationController
   def favorites
     @favorites = current_user.favorites.map(&:place)
   end
+
+  def reservations
+    @reservations = current_user.reservations.map(&:place)
+  end
 end
