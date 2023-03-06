@@ -37,8 +37,20 @@ class Place < ApplicationRecord
   end
 
   def first_available_date
-    return Date.today if reservations.empty? || reservations.where(status: :paid).empty?
+    # if there are no reservations, return today
+    paid_reservations = reservations.where(status: :paid)
 
-    reservations.where(status: :paid).order(:checkin).last.checkout + 1
+    return Date.today if paid_reservations.empty?
+
+    # if there are reservations, return the first available date
+    paid_reservations.order(:checkout).last.checkout + 1
+  end
+
+  def unavaible_dates
+    reservations.where(status: :paid).order(:checkin).map do |reservation|
+      if reservation.checkin >= Date.today
+        { from: reservation.checkin, to: reservation.checkout }
+      end
+    end
   end
 end
