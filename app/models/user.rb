@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :rememberable, :validatable
 
-  validates :name, presence: true, length: { maximum: 25 }
+  validates :first_name, :last_name, presence: true, length: { maximum: 25 }
 
   has_many :reservations, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_one_attached :avatar, dependent: :destroy
 
   before_create :maybe_set_stripe_customer_id
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 
   def maybe_set_stripe_customer_id
     return if stripe_customer_id.present?
