@@ -21,7 +21,7 @@ RSpec.describe "Places", type: :request do
     end
   end
 
-  describe "GET /places/new" do
+  describe "GET /profile/places/new" do
     context "when user is not logged in" do
       it "redirects to login page" do
         sign_out user
@@ -39,7 +39,7 @@ RSpec.describe "Places", type: :request do
     end
   end
 
-  describe "POST /places" do
+  describe "POST /profile/places" do
     context "valid params" do
       it "successfully creates a Place" do
         expect do

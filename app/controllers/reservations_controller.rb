@@ -36,13 +36,17 @@ class ReservationsController < ApplicationController
   end
 
   def success
-    reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-    reservation.update(status: :paid)
+    if params[:session_id].present?
+      reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+      reservation.update(status: :paid)
+    end
   end
-
+  
   def cancel
-    reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-    reservation.update(status: :canceled)
+    if params[:session_id].present?
+      reservation = Reservation.find_by(checkout_session_id: params[:session_id])
+      reservation.update(status: :canceled)
+    end
   end
 
   private

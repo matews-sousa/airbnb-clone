@@ -3,18 +3,17 @@ Rails.application.routes.draw do
   get 'reservations/success', to: 'reservations#success'
   get 'reservations/cancel', to: 'reservations#cancel'
 
-  get 'profile/places', to: 'places#index', as: 'my_places'
-  get 'profile/places/new', to: 'places#new', as: 'new_place'
-
-
   post 'become_host', to: 'hosts#become_host', as: 'become_host'
   get 'connected', to: 'hosts#connected', as: 'connected'
 
   resources :places, only: [:show, :create]
-
   resources :favorites, only: [:create, :destroy]
 
-  get 'profile/favorites', to: 'favorites#index', as: 'my_favorites'
+  scope '/profile' do
+    get 'places', to: 'profile#places', as: 'my_places'
+    get 'places/new', to: 'places#new', as: 'new_place'
+    get 'favorites', to: 'profile#favorites', as: 'my_favorites'
+  end
 
   devise_for :users, controllers: { 
     registrations: 'users/registrations',

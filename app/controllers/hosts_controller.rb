@@ -41,11 +41,11 @@ class HostsController < ApplicationController
       if account.charges_enabled
         user = User.find_by(stripe_account_id: params[:stripe_account_id])
         user.update(
-          host: true
+          host: true,
           charges_enabled: true
         )
       end
-    else
+    end
     redirect_to my_places_path
   end
 end
