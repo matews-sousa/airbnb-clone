@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
   get 'profile/places', to: 'places#index', as: 'my_places'
   get 'profile/places/new', to: 'places#new', as: 'new_place'
+
+
+  post 'become_host', to: 'hosts#become_host', as: 'become_host'
+  get 'connected', to: 'hosts#connected', as: 'connected'
+
   resources :places, only: [:show, :create]
 
   resources :favorites, only: [:create, :destroy]

@@ -1,14 +1,23 @@
 <%= render "shared/profile_nav" %>
 <header class="flex items-center justify-between">
   <h1 class="text-lg font-semibold">My Places</h1>
-  <%= link_to 'Host a Place', new_place_path, class: 'px-3 py-2 rounded-md bg-blue-400 hover:bg-blue-500 cursor-pointer text-white font-semibold' %>
+  <% if current_user.is_host? %>
+    <%= link_to 'Host a Place', new_place_path, class: 'px-3 py-2 rounded-md bg-blue-400 hover:bg-blue-500 cursor-pointer text-white font-semibold' %>
+  <% end %>
 </header>
-<% if @places.empty? %>
-  <p class="text-gray-600 mt-6">You haven't hosted any places yet.</p>
+<% if current_user.is_host? and current_user.charges_enabled? %>
+  <% if @places.empty? %>
+    <p class="text-gray-600 mt-6">You haven't hosted any places yet.</p>
+  <% else %>
+    <div class="grid grid-cols-1 gap-6 mt-6">
+      <% @places.each do |place| %>
+        <%= render "place", place: place %>
+      <% end %>
+    </div>
+  <% end %>
 <% else %>
-  <div class="grid grid-cols-1 gap-6 mt-6">
-    <% @places.each do |place| %>
-      <%= render "place", place: place %>
-    <% end %>
+  <div class="flex flex-col items-center justify-center">
+    <p class="text-gray-600 mt-6 text-center">You haven't become a host yet. Connect to your Stripe account.</p>
+    <%= button_to 'Become a Host', become_host_path, data: { turbo: false }, class: 'p-3 rounded-md bg-blue-400 hover:bg-blue-500 active:bg-blue-600 text-white font-semibold mt-2' %>
   </div>
 <% end %>
