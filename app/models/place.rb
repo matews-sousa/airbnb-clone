@@ -20,6 +20,7 @@ class Place < ApplicationRecord
     numericality: { greater_than: 0 }
 
   has_many :reservations, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   belongs_to :host, class_name: 'User'
   has_many_attached :images, dependent: :destroy
@@ -34,6 +35,10 @@ class Place < ApplicationRecord
 
   def default_image
     images.first
+  end
+
+  def average_vote
+    reviews.average(:vote)
   end
 
   def first_available_date

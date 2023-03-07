@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, length: { maximum: 25 }
 
   has_many :reservations, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :places, foreign_key: 'host_id', dependent: :destroy
   has_one_attached :avatar, dependent: :destroy

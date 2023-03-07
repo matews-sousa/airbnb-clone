@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'reviews/create'
   post 'reservations', to: 'reservations#create'
   get 'reservations/success', to: 'reservations#success'
   get 'reservations/cancel', to: 'reservations#cancel'
 
   post 'become_host', to: 'hosts#become_host', as: 'become_host'
   get 'connected', to: 'hosts#connected', as: 'connected'
+
+  post 'reviews', to: 'reviews#create'
 
   resources :places, only: [:show, :create]
   resources :favorites, only: [:create, :destroy]
