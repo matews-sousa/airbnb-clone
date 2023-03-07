@@ -1,0 +1,9 @@
+<section 
+  data-controller="map"
+  data-action="map-loaded@window->map#initMap"
+  data-map-latitude-value="<%= place.latitude %>" 
+  data-map-longitude-value="<%= place.longitude %>"
+  >
+  <h1 class="font-semibold text-2xl">Where you'll be</h1>
+  <div class="mt-4 w-full h-96" data-map-target="map"></div>
+</section>

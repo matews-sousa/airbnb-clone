@@ -7,6 +7,9 @@ import { application } from "./application"
 import ImageUploadController from "./image_upload_controller"
 application.register("image-upload", ImageUploadController)
 
+import MapController from "./map_controller"
+application.register("map", MapController)
+
 import MenuController from "./menu_controller"
 application.register("menu", MenuController)
 
