@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :review do
     vote { 1 }
     content { "MyText" }
-    user { nil }
-    place { nil }
+    user { create(:user) }
+    place { create(:place) }
   end
 end
