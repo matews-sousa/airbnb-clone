@@ -18,3 +18,6 @@ application.register("places", PlacesController)
 
 import ReservationController from "./reservation_controller"
 application.register("reservation", ReservationController)
+
+import StarReviewController from "./star_review_controller"
+application.register("star-review", StarReviewController)

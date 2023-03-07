@@ -37,8 +37,16 @@ class Place < ApplicationRecord
     images.first
   end
 
+  def user_is_guest?(user)
+    reservations.where(user: user).any?
+  end
+
+  def user_already_reviewed?(user)
+    reviews.where(user: user).any?
+  end
+
   def average_vote
-    reviews.average(:vote)
+    reviews.average(:vote).to_i
   end
 
   def first_available_date

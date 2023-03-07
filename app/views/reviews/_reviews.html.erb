@@ -1,0 +1,13 @@
+<div>
+  <div id="reviews_title">
+    <%= render 'reviews/reviews_title', place: place %>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-16" id="reviews">
+    <% place.reviews.each do |review| %>
+      <%= render 'reviews/review', review: review %>
+    <% end %>
+  </div>
+  <div id="add_review">
+    <%= render 'reviews/form', review: Review.new, place: place %>
+  </div>
+</div>
