@@ -13,6 +13,7 @@ class PlacesController < ApplicationController
 
   def new
     @place = Place.new
+    authorize @place
   end
 
   def create

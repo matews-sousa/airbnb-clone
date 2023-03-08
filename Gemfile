@@ -73,3 +73,4 @@ end
 gem "devise"
 gem "geocoder", "~> 1.8", ">= 1.8.1"
 gem "stripe"
+gem "pundit", "~> 2.3"
