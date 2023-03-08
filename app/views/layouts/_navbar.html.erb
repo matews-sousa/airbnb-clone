@@ -26,10 +26,13 @@
             <%= link_to "Profile", edit_user_registration_path, class: 'text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100' %>
           </li>
           <li>
-            <%= link_to "My Places", my_places_path, class: 'text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100' %>
+            <%= link_to "Your reservations", my_reservations_path, class: 'text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100' %>
           </li>
           <li>
-            <%= link_to "Sign out", destroy_user_session_path, data: {'turbo-method': :delete}, class: 'text-red-400 block px-4 py-3 text-sm hover:bg-gray-100' %>
+            <%= link_to "#{current_user.is_host? ? 'Your places' :  'Become a host'}", my_places_path, class: 'text-gray-700 block px-4 py-3 text-sm hover:bg-gray-100' %>
+          </li>
+          <li>
+            <%= link_to "Sign out", destroy_user_session_path, data: {'turbo-method': :delete}, class: 'border-t border-gray-300 text-red-400 block px-4 py-3 text-sm hover:bg-gray-100' %>
           </li>
         <% else %>
           <li>
