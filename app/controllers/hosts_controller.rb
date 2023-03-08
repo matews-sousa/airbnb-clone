@@ -30,7 +30,7 @@ class HostsController < ApplicationController
     link = Stripe::AccountLink.create({
       account: current_user.stripe_account_id,
       refresh_url: my_places_url,
-      return_url: connected_url + "?stripe_account_id=#{current_user.stripe_account_id}",
+      return_url: my_places_url,
       type: 'account_onboarding',
     })
     redirect_to link.url, allow_other_host: true

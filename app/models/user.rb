@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :places, foreign_key: 'host_id', dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
 
-  before_create :maybe_set_stripe_customer_id
+  after_create :maybe_set_stripe_customer_id
 
   def name
     "#{first_name} #{last_name}"

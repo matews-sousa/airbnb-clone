@@ -28,7 +28,7 @@
         } 
       %>
     </div>
-    <%= form.number_field :guests, placeholder: "Number of guests", min: "1", max: "#{@place.max_guests}", class: "border border-gray-500 rounded-b-md w-full p-3" %>
+    <%= form.number_field :guests, placeholder: "Number of guests", value: "#{@place.max_guests}", min: "1", max: "#{@place.max_guests}", class: "border border-gray-500 rounded-b-md w-full p-3" %>
     <% if signed_in? %>
       <%= form.submit 'Reserve', class: "mt-4 p-3 rounded-md bg-red-500 hover:bg-red-600 w-full text-white font-semibold cursor-pointer" %>
     <% else %>
