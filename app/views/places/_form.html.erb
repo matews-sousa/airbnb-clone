@@ -3,23 +3,35 @@
     <div class="grid grid-cols-2 gap-4">
       <div class="flex flex-col">
         <%= form.label :name, class: 'font-medium mb-1' %>
-        <%= form.text_field :name, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+        <%= form.text_field :name, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full' %>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:name).first %>
+        </p>
       </div>
       <div class="flex flex-col">
         <%= form.label :headline, class: 'font-medium mb-1' %>
-        <%= form.text_field :headline, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+        <%= form.text_field :headline, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full' %>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:headline).first %>
+        </p>
       </div>
     </div>
     <div class="flex flex-col">
       <%= form.label :description, class: 'font-medium mb-1' %>
-      <%= form.text_area :description, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+      <%= form.text_area :description, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full' %>
+      <p class="text-xs text-red-500 italic">
+        <%= place.errors.full_messages_for(:description).first %>
+      </p>
     </div>
     <div class="flex flex-col"  
       data-controller="places"
       data-action="map-loaded@window->places#initMap"
       >
       <%= form.label :address, class: 'font-medium mb-1' %>
-      <input autocomplete="false", data-places-target="input" data-action="keydown->places#keydown" class='p-2 rounded-md border border-gray-400 hover:border-gray-500' />
+      <input autocomplete="false", data-places-target="input" data-action="keydown->places#keydown" class='p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full' />
+      <p class="text-xs text-red-500 italic">
+        <%= place.errors.full_messages_for(:address_1).first %>
+      </p>
       <input type="hidden" name="place[address_1]" data-places-target="line1">
       <input type="hidden" name="place[address_2]" data-places-target="line2">
       <input type="hidden" name="place[postal_code]" data-places-target="postal_code">
@@ -32,40 +44,61 @@
     <div class="grid grid-cols-2 gap-4">
       <div class="flex flex-col">
         <%= form.label :price, class: 'font-medium mb-1' %>
-        <%= form.number_field :price, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+        <%= form.number_field :price, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full' %>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:price).first %>
+        </p>
       </div>
       <div class="flex flex-col">
         <%= form.label :cleaning_fee, class: 'font-medium mb-1' %>
-        <%= form.number_field :cleaning_fee, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500' %>
+        <%= form.number_field :cleaning_fee, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full' %>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:cleaning_fee).first %>
+        </p>
       </div>
     </div>
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
       <div class="flex flex-col">
         <%= form.label :max_guests, class: 'font-medium mb-1' %>
-        <%= form.number_field :max_guests, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', value: "1"%>
+        <%= form.number_field :max_guests, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full', value: "1"%>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:max_guests).first %>
+        </p>
       </div>
       <div class="flex flex-col">
         <%= form.label :rooms, class: 'font-medium mb-1' %>
-        <%= form.number_field :rooms, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', value: "1"%>
+        <%= form.number_field :rooms, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full', value: "1"%>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:rooms).first %>
+        </p>
       </div>
       <div class="flex flex-col">
         <%= form.label :beds, class: 'font-medium mb-1' %>
-        <%= form.number_field :beds, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', value: "1"%>
+        <%= form.number_field :beds, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full', value: "1"%>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:beds).first %>
+        </p>
       </div>
       <div class="flex flex-col">
         <%= form.label :baths, class: 'font-medium mb-1' %>
-        <%= form.number_field :baths, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', value: "1"%>
+        <%= form.number_field :baths, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full', value: "1"%>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:baths).first %>
+        </p>
       </div>
       <div class="flex flex-col">
         <%= form.label :min_reservation_days, class: 'font-medium mb-1' %>
-        <%= form.number_field :min_reservation_days, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', value: "1"%>
+        <%= form.number_field :min_reservation_days, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full', value: "1"%>
+        <p class="text-xs text-red-500 italic">
+          <%= place.errors.full_messages_for(:min_reservation_days).first %>
+        </p>
       </div>
     </div>
     <div class="flex flex-col" data-controller="image-upload">
       <%= form.label :images, class: 'font-medium' %>
       <div class="border rounded-md min-h-32 my-1 flex flex-wrap gap-2" data-image-upload-target="preview">
       </div>
-      <%= form.file_field :images, multiple: true, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500', data: {
+      <%= form.file_field :images, multiple: true, class: 'p-2 rounded-md border border-gray-400 hover:border-gray-500 w-full', data: {
         "image-upload-target": "input",
         action: "change->image-upload#uploadMultiple"
       } %>

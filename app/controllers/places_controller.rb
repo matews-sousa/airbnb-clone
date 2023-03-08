@@ -19,10 +19,12 @@ class PlacesController < ApplicationController
     @place = Place.new(place_params)
     @place.host = current_user
 
-    if @place.save
-      redirect_to place_path(@place)
-    else
-      render :new
+    respond_to do |format|
+      if @place.save
+        format.html { redirect_to @place, notice: 'Place was successfully created.' }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
