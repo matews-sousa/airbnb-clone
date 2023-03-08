@@ -1,0 +1,43 @@
+<%= render 'profile/nav' %>
+<h1 class="text-2xl font-semibold">
+  <%= @reservation.place.name %>
+</h1>
+<p class="text-gray-600">
+  <%= @reservation.place.address %>
+</p>
+<div class="flex items-center gap-4 mt-4">
+  <div>
+    <p class="font-medium">Check-in:</p>
+    <p class="text-gray-600"><%= @reservation.checkin.strftime("%B %d %Y") %></p>
+  </div>
+  <span class="text-3xl">
+    &#x2E31;
+  </span>
+  <div>
+    <p class="font-medium">Check-out:</p>
+    <p class="text-gray-600"><%= @reservation.checkout.strftime("%B %d %Y") %></p>
+  </div>
+</div>
+<div class="mt-4">
+  <div class="flex gap-2">
+    <p class="font-medium">Guests: </p>
+    <p class="text-gray-600"><%= @reservation.guests %></p>
+  </div>
+  <div class="flex gap-2">
+    <p class="font-medium">Total price: </p>
+    <p class="text-gray-600"><%= number_to_currency(@reservation.total_price, precision: 1) %></p>
+  </div>
+</div>
+<% if @reservation.status == "pending" %>
+  <div class="mt-4">
+    <p class="text-gray-600">Your reservation payment is pending. You will receive an email confirmation shortly.</p>
+  </div>
+<% elsif @reservation.status == "paid" %>
+  <div class="mt-4">
+    <p class="text-gray-600">Your reservation is paid. You will receive an email confirmation shortly.</p>
+  </div>
+<% elsif @reservation.status == "canceled" %>
+  <div class="mt-4">
+    <p class="text-gray-600">Your reservation is canceled.</p>
+  </div>
+<% end %>

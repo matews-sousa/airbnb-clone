@@ -1,6 +1,11 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
+  # GET /reservations/:id
+  def show
+    @reservation = Reservation.find(params[:id])
+  end
+
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
@@ -15,8 +20,8 @@ class ReservationsController < ApplicationController
           quantity: 1
         }],
         customer: @reservation.user.stripe_customer_id,
-        success_url: reservations_success_url(@reservation) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url: reservations_cancel_url(@reservation) + "?session_id={CHECKOUT_SESSION_ID}",
+        success_url: reservation_url(@reservation),
+        cancel_url: reservation_url(@reservation),
         payment_intent_data: {
           application_fee_amount: (100 * @reservation.total_price * 0.1).to_i,
           transfer_data: {
@@ -32,20 +37,6 @@ class ReservationsController < ApplicationController
       redirect_to session.url, allow_other_host: true
     else
       redirect_to place_path(@reservation.place), notice: "Error"
-    end
-  end
-
-  def success
-    if params[:session_id].present?
-      reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-      reservation.update(status: :paid)
-    end
-  end
-  
-  def cancel
-    if params[:session_id].present?
-      reservation = Reservation.find_by(checkout_session_id: params[:session_id])
-      reservation.update(status: :canceled)
     end
   end
 

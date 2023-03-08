@@ -13,9 +13,31 @@ RSpec.describe "Profiles", type: :request do
   end
 
   describe "GET /profile/places/new" do
-    it "returns http success" do
-      get new_place_path
-      expect(response).to have_http_status(200)
+    context "when user is not logged in" do
+      it "redirects to root path" do
+        get new_place_path
+        expect(response).to redirect_to(root_path)
+      end
+    end
+    
+    context "when user is logged in" do
+      context "when user is not a host" do
+        it "redirects to root path" do
+          get new_place_path
+          expect(response).to redirect_to(root_path)
+        end
+      end
+
+      context "when user is a host" do
+        it "returns http success" do
+          sign_out user
+          host = create(:user, :host)
+          sign_in host
+
+          get new_place_path
+          expect(response).to have_http_status(:success)
+        end
+      end
     end
   end
 

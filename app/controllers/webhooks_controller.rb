@@ -29,6 +29,10 @@ class WebhooksController < ApplicationController
         is_host: account.charges_enabled,
         charges_enabled: account.charges_enabled
       )
+    when 'checkout.session.completed'
+      session = event.data.object
+      reservation = Reservation.find_by(checkout_session_id: session.id)
+      reservation.update(status: :paid)
     end
 
 

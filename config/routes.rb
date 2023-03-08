@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'reviews/create'
   post 'reservations', to: 'reservations#create'
-  get 'reservations/success', to: 'reservations#success'
-  get 'reservations/cancel', to: 'reservations#cancel'
 
   post 'become_host', to: 'hosts#become_host', as: 'become_host'
   get 'connected', to: 'hosts#connected', as: 'connected'
@@ -17,6 +14,7 @@ Rails.application.routes.draw do
     get 'places/new', to: 'places#new', as: 'new_place'
     get 'favorites', to: 'profile#favorites', as: 'my_favorites'
     get 'reservations', to: 'profile#reservations', as: 'my_reservations'
+    get 'reservations/:id', to: 'profile#reservation', as: 'reservation'
   end
 
   devise_for :users, controllers: { 

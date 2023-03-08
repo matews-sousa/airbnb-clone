@@ -21,25 +21,7 @@ RSpec.describe "Places", type: :request do
     end
   end
 
-  describe "GET /profile/places/new" do
-    context "when user is not logged in" do
-      it "redirects to login page" do
-        sign_out user
-        get new_place_path
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
-    context "when user is logged in" do
-      it "returns http success" do
-        sign_in user
-        get new_place_path
-        expect(response).to have_http_status(:success)
-      end
-    end
-  end
-
-  describe "POST /profile/places" do
+  describe "POST /places" do
     context "valid params" do
       it "successfully creates a Place" do
         expect do
