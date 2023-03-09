@@ -1,11 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
-  # GET /reservations/:id
-  def show
-    @reservation = Reservation.find(params[:id])
-  end
-
+  # POST /reservations
   def create
     @reservation = Reservation.new(reservation_params)
     @reservation.user = current_user
@@ -37,6 +33,22 @@ class ReservationsController < ApplicationController
       redirect_to session.url, allow_other_host: true
     else
       redirect_to place_path(@reservation.place), notice: "Error"
+    end
+  end
+
+  # POST /reservations/:id/refund
+  def refund
+    @reservation = Reservation.find(params[:id])
+    
+    if @reservation.refundable?
+      checkout_session = Stripe::Checkout::Session.retrieve(@reservation.checkout_session_id)
+      refund = Stripe::Refund.create({
+        payment_intent: checkout_session.payment_intent,
+      })
+      @reservation.update(status: :refunded)
+      redirect_to reservation_path(@reservation)
+    else
+      redirect_to reservation_path(@reservation)
     end
   end
 
