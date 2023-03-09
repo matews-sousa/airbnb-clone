@@ -35,17 +35,13 @@
 <% elsif @reservation.status == "paid" %>
   <div class="mt-4">
     <p class="text-gray-600">Your reservation is paid. You will receive an email confirmation shortly.</p>
-    <% if @reservation.refundable? %>
-      <%= button_to "Cancel and refund", refund_reservation_path(@reservation), data: { "turbo-confirm": "Are you sure? Your payment will be refunded." },
+    <% if @reservation.cancelable? %>
+      <%= button_to "Cancel reservation", cancel_reservation_path(@reservation), data: { "turbo-confirm": "Are you sure? Your payment will be refunded." },
       class: 'mt-4 p-3 cursor-pointer text-red-500 font-semibold rounded-md text-center bg-red-100 hover:bg-red-200' %>
     <% end %>
   </div>
 <% elsif @reservation.status == "canceled" %>
   <div class="mt-4">
     <p class="text-gray-600">Your reservation is canceled.</p>
-  </div>
-<% elsif @reservation.status == "refunded" %>
-  <div class="mt-4">
-    <p class="text-gray-600">Your reservation is refunded.</p>
   </div>
 <% end %>

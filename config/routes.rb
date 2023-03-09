@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   post 'reservations', to: 'reservations#create'
-  post 'reservations/:id/refund', to: 'reservations#refund', as: 'refund_reservation'
+  post 'reservations/:id/cancel', to: 'reservations#cancel', as: 'cancel_reservation'
 
   post 'become_host', to: 'hosts#become_host', as: 'become_host'
   get 'connected', to: 'hosts#connected', as: 'connected'

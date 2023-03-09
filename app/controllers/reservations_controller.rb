@@ -29,23 +29,22 @@ class ReservationsController < ApplicationController
         }
       })
 
-      @reservation.update(checkout_session_id: session.id)
+      @reservation.update(checkout_session_id: session.id, payment_intent_id: session.payment_intent)
       redirect_to session.url, allow_other_host: true
     else
       redirect_to place_path(@reservation.place), notice: "Error"
     end
   end
 
-  # POST /reservations/:id/refund
-  def refund
+  # POST /reservations/:id/cancel
+  def cancel
     @reservation = Reservation.find(params[:id])
     
-    if @reservation.refundable?
-      checkout_session = Stripe::Checkout::Session.retrieve(@reservation.checkout_session_id)
+    if @reservation.cancelable?
       refund = Stripe::Refund.create({
-        payment_intent: checkout_session.payment_intent,
+        payment_intent: @reservation.payment_intent_id,
       })
-      @reservation.update(status: :refunded)
+      @reservation.update(status: :canceled) if refund.status == 'succeeded'
       redirect_to reservation_path(@reservation)
     else
       redirect_to reservation_path(@reservation)

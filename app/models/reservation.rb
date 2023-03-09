@@ -4,8 +4,7 @@ class Reservation < ApplicationRecord
   enum status: {
     pending: 0,
     paid: 1,
-    canceled: 2,
-    refunded: 3
+    canceled: 2
   }
 
   belongs_to :place
@@ -19,7 +18,7 @@ class Reservation < ApplicationRecord
     (total_nights * place.price) + place.cleaning_fee
   end
 
-  def refundable?
+  def cancelable?
     status == 'paid' && Time.now < checkin
   end
 end
