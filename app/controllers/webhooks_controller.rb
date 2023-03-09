@@ -33,6 +33,8 @@ class WebhooksController < ApplicationController
       session = event.data.object
       reservation = Reservation.find_by(checkout_session_id: session.id)
       reservation.update(status: :paid)
+      ReservationMailer.with(reservation: reservation).confirm.deliver_later
+      ReservationMailer.with(reservation: reservation).confirm_host.deliver_later
     end
 
 

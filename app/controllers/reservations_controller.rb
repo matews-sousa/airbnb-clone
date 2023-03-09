@@ -45,6 +45,7 @@ class ReservationsController < ApplicationController
         payment_intent: @reservation.payment_intent_id,
       })
       @reservation.update(status: :canceled) if refund.status == 'succeeded'
+      ReservationMailer.with(reservation: @reservation).cancel.deliver_later if refund.status == 'succeeded'
       redirect_to reservation_path(@reservation)
     else
       redirect_to reservation_path(@reservation)

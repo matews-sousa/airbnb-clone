@@ -1,0 +1,33 @@
+<h1 style="">Hey, <%= @reservation.user.name %>!</h1>
+<p>
+  Your reservation for "<%= @reservation.place.name %>" was canceled.
+</p>
+<p>
+  <span>Reserved at</span>
+  <span style="font-weight: bold;"><%= @reservation.created_at.strftime("%B %d, %Y - %H:%M") %></span>
+</p>
+<p>
+  <span>Canceled at</span>
+  <span style="font-weight: bold;"><%= @reservation.updated_at.strftime("%B %d, %Y - %H:%M") %></span>
+</p>
+<p>
+  <span>Check-in</span>
+  <span style="font-weight: bold;"><%= @reservation.checkin.strftime("%B %d, %Y") %></span>
+</p>
+<p>
+  <span>Check-out</span>
+  <span style="font-weight: bold;"><%= @reservation.checkout.strftime("%B %d, %Y") %></span>
+</p>
+<p>
+  <span>Guests</span>
+  <span style="font-weight: bold;"><%= @reservation.guests %></span>
+</p>
+<p>
+  <span>Total price refunded</span>
+  <span style="font-weight: bold;"><%= number_to_currency(@reservation.total_price) %></span>
+</p>
+<p>
+  <span>Status</span>
+  <span style="font-weight: bold;"><%= @reservation.status %></span>
+</p>
+<%= link_to "View reservation", reservation_url(@reservation) %>
