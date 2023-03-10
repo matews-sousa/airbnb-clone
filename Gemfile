@@ -71,6 +71,8 @@ group :development do
 end
 
 gem "devise"
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
 gem "geocoder", "~> 1.8", ">= 1.8.1"
 gem "stripe"
 gem "pundit", "~> 2.3"

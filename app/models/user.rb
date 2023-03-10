@@ -1,10 +1,12 @@
+require 'open-uri'
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :rememberable, :validatable
+         :rememberable, :validatable, :omniauthable, omniauth_providers: [:github]
 
-  validates :first_name, :last_name, presence: true, length: { maximum: 25 }
+  validates :first_name, presence: true, length: { maximum: 25 }
 
   has_many :reservations, dependent: :destroy
   has_many :reviews, dependent: :destroy
@@ -29,5 +31,21 @@ class User < ApplicationRecord
       }
     })
     self.update(stripe_customer_id: customer.id)
+  end
+
+  def self.from_omniauth(access_token)
+    user = User.where(email: access_token.info.email).first
+
+    unless user
+      user = User.create!(
+        first_name: access_token.info.name,
+        email: access_token.info.email,
+        password: Devise.friendly_token[0,20]
+      )
+      downloaded_image = URI.parse(access_token.info.image).open
+      user.avatar.attach(io: downloaded_image, filename: "avatar_#{user.id}.jpg")
+    end
+
+    user
   end
 end

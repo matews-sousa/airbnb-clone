@@ -18,7 +18,8 @@ Rails.application.routes.draw do
     get 'reservations/:id', to: 'profile#reservation', as: 'reservation'
   end
 
-  devise_for :users, controllers: { 
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }, path: '', path_names: {
