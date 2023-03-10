@@ -25,10 +25,14 @@
     <span class="text-gray-700">or</span>
     <div class="h-[0.5px] bg-gray-400 flex-1"></div>
   </div>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to omniauth_authorize_path(resource_name, provider), data: { turbo: false }, class: 'font-semibold p-2 bg-black hover:bg-neutral-900 text-white w-full rounded-md flex items-center justify-center gap-2' do %>
-      <%= image_tag "/assets/#{provider}-logo.svg", class: 'w-8 h-8 stroke-white' %>
-      <span><%= "Sign in with #{OmniAuth::Utils.camelize(provider)}" %></span>
+  <div class="space-y-4">
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <% style = provider == :google ? "border text-black bg-white shadow-md hover:shadow-lg" : "bg-black hover:bg-neutral-800 text-white" %>
+      <%= button_to omniauth_authorize_path(resource_name, provider), data: { turbo: false },
+        class: "#{style} font-semibold p-2 w-full rounded-md flex items-center justify-center gap-2" do %>
+        <%= image_tag "/assets/#{provider}-logo.svg", class: 'w-6 h-6' %>
+        <span><%= "Sign in with #{OmniAuth::Utils.camelize(provider)}" %></span>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 <% end %>

@@ -72,6 +72,7 @@ end
 
 gem "devise"
 gem "omniauth-github"
+gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 gem "geocoder", "~> 1.8", ">= 1.8.1"
 gem "stripe"
