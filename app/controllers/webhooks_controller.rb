@@ -7,8 +7,11 @@ class WebhooksController < ApplicationController
     event = nil
 
     begin
+      signing_secret = Rails.env.production? ?
+                       Rails.application.credentials.dig(:stripe, :webhook_secret_production) :
+                       Rails.application.credentials.dig(:stripe, :webhook_secret_development)
       event = Stripe::Webhook.construct_event(
-        payload, sig_header, Rails.application.credentials.dig(:stripe, :webhook)
+        payload, sig_header, signing_secret
       )
     rescue JSON::ParserError => e
       status 400
