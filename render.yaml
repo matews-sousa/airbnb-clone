@@ -1,6 +1,6 @@
 databases:
   - name: postgres
-    plane: free
+    plan: free
     ipAllowList: []
 
 services:
