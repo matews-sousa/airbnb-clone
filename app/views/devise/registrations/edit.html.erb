@@ -53,7 +53,7 @@
               </svg>
               <span>Edit</span>
             <% end %>
-            <%= image_tag current_user.avatar.attached? ? current_user.avatar : '/assets/default_pfp.jpg', class: "w-44 h-44 rounded-full", data: { "image-upload-target": "preview" } %>
+            <%= image_tag current_user.avatar.attached? ? current_user.avatar : 'default_pfp.jpg', class: "w-44 h-44 rounded-full", data: { "image-upload-target": "preview" } %>
             <%= f.file_field :avatar, data: { "image-upload-target": "input", action: "change->image-upload#upload" }, class: 'hidden' %>
           </div>
         </div>

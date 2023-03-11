@@ -1,8 +1,8 @@
 <nav class="border-b border-gray-300 py-4 bg-white">
   <div class="max-w-7xl mx-auto flex items-center justify-between px-4">
     <%= link_to root_path do %>
-      <%= image_tag "/assets/airbnb-full.svg", alt: 'Airbnb', class: 'w-24 hidden lg:block' %>
-      <%= image_tag "/assets/airbnb-icon.svg", alt: 'Airbnb', class: 'w-10 block lg:hidden' %>
+      <%= image_tag "airbnb-full.svg", alt: 'Airbnb', class: 'w-24 hidden lg:block' %>
+      <%= image_tag "airbnb-icon.svg", alt: 'Airbnb', class: 'w-10 block lg:hidden' %>
     <% end %>
     <div data-controller="menu" class="relative">
       <button data-menu-target="button" data-action="click->menu#toggle keydown.esc->menu#close click@window->menu#close" class="border border-gray-300 hover:shadow-lg transition-all rounded-full flex items-center gap-3 py-1 px-2">
@@ -12,7 +12,7 @@
         <% if user_signed_in? && current_user.avatar.attached? %>
           <%= image_tag current_user.avatar, class: 'w-9 rounded-full' %>
         <% else %>
-          <%= image_tag "/assets/default_pfp.jpg", class: 'w-9' %>
+          <%= image_tag "default_pfp.jpg", class: 'w-9' %>
         <% end %>
       </button>
       <ul
