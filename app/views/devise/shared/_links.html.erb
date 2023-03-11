@@ -30,7 +30,7 @@
       <% style = provider == :google ? "border text-black bg-white shadow-md hover:shadow-lg" : "bg-black hover:bg-neutral-800 text-white" %>
       <%= button_to omniauth_authorize_path(resource_name, provider), data: { turbo: false },
         class: "#{style} font-semibold p-2 w-full rounded-md flex items-center justify-center gap-2" do %>
-        <%= image_tag "/assets/#{provider}-logo.svg", class: 'w-6 h-6' %>
+        <%= image_tag "#{provider}-logo.svg", class: 'w-6 h-6' %>
         <span><%= "Sign in with #{OmniAuth::Utils.camelize(provider)}" %></span>
       <% end %>
     <% end %>
