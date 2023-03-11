@@ -25,6 +25,10 @@ class WebhooksController < ApplicationController
 
     # Handle the event
     case event.type
+    when 'account.updated'
+      account = event.data.object
+      user = User.find_by(stripe_account_id: account.id)
+      user.update(is_host: account.charges_enabled, charges_enabled: account.charges_enabled)
     when 'checkout.session.completed'
       session = event.data.object
       reservation = Reservation.find_by(checkout_session_id: session.id)
