@@ -7,6 +7,9 @@
       <%= render 'reviews/review', review: review %>
     <% end %>
   </div>
+  <% if !place.user_already_reviewed?(current_user) %>
+    <div class="h-[0.5px] bg-gray-300 w-full my-6"></div>
+  <% end %>
   <div id="add_review">
     <%= render 'reviews/form', review: Review.new, place: place %>
   </div>

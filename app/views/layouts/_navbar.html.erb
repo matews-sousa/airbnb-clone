@@ -9,11 +9,7 @@
         <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
-        <% if user_signed_in? && current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar, class: 'w-9 rounded-full' %>
-        <% else %>
-          <%= image_tag "default_pfp.jpg", class: 'w-9' %>
-        <% end %>
+        <%= image_tag current_user.user_avatar, class: 'w-9 rounded-full' %>
       </button>
       <ul
         data-menu-target="menu"

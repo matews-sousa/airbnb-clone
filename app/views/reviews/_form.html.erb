@@ -1,8 +1,8 @@
-<% if place.user_is_guest?(current_user) && !place.user_already_reviewed?(current_user) %>
-  <%= form_with model: review do |f| %>
+<% if place.reviewable_by?(current_user) %>
+  <%= form_with(model: review) do |f| %>
     <input type="hidden" name="review[place_id]" value="<%= place.id %>">
-    <div class="mt-12">
-      <div class="flex mb-2" data-controller="star-review">
+    <div>
+      <div class="flex" data-controller="star-review">
         <% 5.times do |index| %>
           <label class="flex items-center gap-2 cursor-pointer" id="<%= "star-#{index+1}" %>">
             <input type="radio" name="review[vote]" value="<%= index + 1 %>" data-action="change->star-review#changeValue" class="hidden">
@@ -12,7 +12,13 @@
           </label>
         <% end %>
       </div>
+      <p class="text-xs text-red-400 italic mb-2">
+        <%= review.errors.full_messages_for(:vote).first %>
+      </p>
       <%= f.text_area :content, class: 'w-full h-32 rounded-md border border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2', placeholder: 'Write a review...' %>
+      <p class="text-xs text-red-400 italic mb-2">
+        <%= review.errors.full_messages_for(:content).first %>
+      </p>
       <%= f.submit 'Create Review', class: 'p-2 bg-blue-400 hover:bg-blue-500 rounded-md text-white font-semibold cursor-pointer' %>
     </div>
   <% end %>

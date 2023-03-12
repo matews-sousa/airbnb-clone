@@ -16,11 +16,10 @@ class ReviewsController < ApplicationController
           ]
         end
         ReviewMailer.with(review: @review).review_created.deliver_later
-        format.html { redirect_to @review.place, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
       else
-        format.html { render place_path(@review.place) }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("add_review", partial: "reviews/form", locals: { place: @review.place, review: @review })
+        end
       end
     end
   end

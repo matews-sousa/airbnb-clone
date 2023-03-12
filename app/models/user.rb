@@ -20,6 +20,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def user_avatar
+    if avatar.attached?
+      avatar
+    else
+      "default_pfp.jpg"
+    end
+  end
+
   def maybe_set_stripe_customer_id
     return if stripe_customer_id.present?
 

@@ -40,10 +40,15 @@ class Place < ApplicationRecord
   def user_is_guest?(user)
     reservations.where(user: user).any?
   end
-
+  
   def user_already_reviewed?(user)
     reviews.where(user: user).any?
   end
+
+  def reviewable_by?(user)
+    user_is_guest?(user) && !user_already_reviewed?(user) && reservations.where(user: user).last.checkout < Date.today
+  end
+
 
   def average_vote
     reviews.average(:vote).to_i
